@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="lyric"></div>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $.ajax({
+      type:"get",
+      dataType:"jsonp",
+      jsonp:'callback',
+      jsonpCallback:'jsonp2',
+      url:"https://c.y.qq.com/splcloud/fcgi-bin/fcg_musiclist_getmyfav.fcg",
+      data:{
+        songid:204506746,
+        songtype:13,
+        g_tk:5381,
+        _:1515742067329,
+        referer:"https://y.qq.com/w/toplist.html?ADTAG=myqq&from=myqq&channel=10007100&id=4&type=top"
+      },
+      success:function(data){
+        console.log(data);
+      },
+      error:function(){
+
+      }
+
+    });
+  });
+  // function ajax(params){
+  //   params=params || {};
+  //   params.data=params.data||{};
+  //   var json=params.jsonp?jsonp(params):json(params);
+  //   // jsonp请求
+  //   function jsonp(params){
+  //     //创建script标签并加入到页面之中
+  //     var callbackName=params.jsonp;
+  //     var head=document.getElementsByTagName('head')[0];
+  //     //设置传递给后台的回调函数名
+  //     params.data["jsonpCallback"]=callbackName;
+  //     var data=formatParams(params.data);
+  //     var script=document.createElement('script');
+  //     head.appendChild(script);
+  //     //创建jsonp回调函数
+  //     window[callbackName]=function(json){
+  //       head.removeChild(script);
+  //       clearTimeout(script.timer);
+  //       window[callbackName]=null;
+  //       params.success && params.success(json);
+  //     };
+  //     //发送请求
+  //     script.src=params.url+'?'+data;
+  //     //为了得知此次请求是否成功，设置超时处理
+  //     if(params.time){
+  //       script.timer=setTimeout(function(){
+  //         window[callbackName]=null;
+  //         head.removeChild(script);
+  //         params.error && params.error({
+  //           message:'超时'
+  //         });
+  //       },time);
+  //     }
+  //   }
+  //   //格式化参数
+  //   function formatParams(data){
+  //     var arr=[];
+  //     for(var name in data){
+  //       arr.push(encodeURIComponent(name)+'='+encodeURIComponent(data[name]));
+  //     }
+  //     //添加一个随机数，防止缓存
+  //     // arr.push('v='+random());
+  //     return arr.join('&')
+  //   }
+  //   //获取随机数
+  //   function random(){
+  //     return Math.floor(Math.random()*10000+500);
+  //   }
+  //
+  // }
+  // ajax({
+  //   url:"https://c.y.qq.com/splcloud/fcgi-bin/fcg_musiclist_getmyfav.fcg",//请求地址
+  //   jsonp:'jsonp2',//采用jsonp请求，且回调函数名为“jsonp1”，可以设置合法的字符串
+  //   data:{
+  //     songid:204506746,
+  //     songtype:13,
+  //     g_tk:5381,
+  //     _:1515738897491,
+  //
+  //   },//传输数据
+  //   success:function (res){
+  //     console.log(JSON.stringify(res));
+  //     document.getElementById('lyric').innerHTML=res;
+  //   },
+  //   error:function(error){
+  //     alert(error)
+  //   }//请求失败的回调函数
+  // });
+
+  </script>
+</body>
+</html>
